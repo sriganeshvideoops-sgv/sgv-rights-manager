@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2762,7 +2763,7 @@ function updateGDriveBtn(on) {
   const label = document.getElementById('gdrive-btn-label');
   if (!btn || !label) return;
   btn.style.color   = on ? '#ff8f00' : '';
-  label.textContent = on ? '🔥 Firebase' : '🔥 Sync';
+  label.textContent = on ? '✓ Firebase' : 'Firebase';
 }
 
 function renderGDriveModal() {
@@ -5160,10 +5161,13 @@ renderLibrary();
 <script>
 // ─── FIREBASE AUTH + SIGN IN ──────────────────────────────────────────────────
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyPlaceholderKeyReplaceThis",
+  apiKey: "AIzaSyCiQPDebR3PAAwLugA8-3UAv8nfvgR14dA",
   authDomain: "sgv-rights-manager-d2151.firebaseapp.com",
   databaseURL: "https://sgv-rights-manager-d2151-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "sgv-rights-manager-d2151",
+  storageBucket: "sgv-rights-manager-d2151.firebasestorage.app",
+  messagingSenderId: "745112144008",
+  appId: "1:745112144008:web:11862604fa2dd5d6fbf73d"
 };
 
 // Allowed email addresses — add your team emails here
@@ -5171,7 +5175,6 @@ const ALLOWED_EMAILS = [
   'venkatesh@sriganeshvideo.com',
   // Add more team emails below:
   // 'teammate@gmail.com',
-  // 'editor@sriganeshvideo.com',
 ];
 
 let firebaseApp = null;
