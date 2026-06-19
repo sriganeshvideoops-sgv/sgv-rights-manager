@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4715,16 +4716,21 @@ const AUTH_EMAILS_KEY = 'rm_auth_emails';
 const ADMIN_EMAIL = 'sriganeshvideoops@gmail.com'; // permanent admin — cannot be removed
 const PROTECTED_EMAILS = ['sriganeshvideoops@gmail.com', 'venkatesh@sriganeshvideo.com'];
 
+const HARDCODED_EMAILS = [
+  'venkatesh@sriganeshvideo.com',
+  'sriganeshvideoops@gmail.com',
+  'sgvaccess.ws27@gmail.com',
+];
+
 function getAuthEmails() {
   try {
-    const stored = JSON.parse(localStorage.getItem(AUTH_EMAILS_KEY));
-    if (stored && stored.length) {
-      // Always ensure admin is in the list
-      if (!stored.includes(ADMIN_EMAIL)) stored.unshift(ADMIN_EMAIL);
-      return stored;
-    }
-  } catch {}
-  return [ADMIN_EMAIL, 'venkatesh@sriganeshvideo.com'];
+    const stored = JSON.parse(localStorage.getItem(AUTH_EMAILS_KEY) || '[]');
+    // Merge hardcoded + stored, remove duplicates
+    const merged = [...new Set([...HARDCODED_EMAILS, ...stored])];
+    return merged;
+  } catch {
+    return HARDCODED_EMAILS;
+  }
 }
 
 function saveAuthEmails(emails) {
@@ -4787,9 +4793,9 @@ function removeAuthEmail(email) {
 
 // Init auth emails from localStorage on load
 window.addEventListener('load', () => {
-  const stored = getAuthEmails();
+  const merged = getAuthEmails();
   ALLOWED_EMAILS.length = 0;
-  stored.forEach(e => ALLOWED_EMAILS.push(e));
+  merged.forEach(e => ALLOWED_EMAILS.push(e));
 });
 
 // ─── MULTI-USER SYSTEM ────────────────────────────────────────────────────────
